@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Title</title>
+</head>
+<body>
+
+
+    <form action="updateEditedUserDetails" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="oldEmail" th:value="${userDetails.email}">
+        <label for="name">Name</label>
+        <input id="name" name="name" placeholder="Enter Name" th:value="${userDetails.name}"/>
+        <label for="email">Email</label>
+        <input id="email" name="email" placeholder="Enter Email" th:value="${userDetails.email}"/>
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" placeholder="Enter Phone" th:value="${userDetails.phone}"/>
+        <label for="state">State</label>
+        <input id="state" name="state" placeholder="Enter State" th:value="${userDetails.state}"/>
+        <p>Gender</p>
+        <div th:switch="${userDetails.gender}">
+
+            <div th:case="'male'">
+                <input type="radio" id="option1" name="gender" value="male" checked="true"/>
+                <label for="option1">Male</label><br>
+                <input type="radio" id="option2" name="gender" value="female" />
+                <label for="option2">Female</label><br>
+            </div>
+            <div th:case="'female'">
+                <input type="radio" id="option3" name="gender" value="male"/>
+                <label for="option3">Male</label><br>
+                <input type="radio" id="option4" name="gender" value="female"  checked="true"/>
+                <label for="option4">Female</label><br>
+            </div>
+
+        </div>
+
+
+        <select name="skills" multiple="multiple" >
+            <option value="Java"  th:selected="${#lists.contains(allSkills,'Java')}">Java</option>
+
+
+            <option value="Spring Boot" th:selected="${#lists.contains(allSkills,'Spring Boot')}">Spring Boot</option>
+
+
+            <option value="Javascript" th:selected="${#lists.contains(allSkills,'Javascript')}">Javascript</option>
+
+
+            <option value="MySql" th:selected="${#lists.contains(allSkills,'MySql')}">MySql</option>
+
+
+        </select>
+
+
+        <label>Photos: </label>
+        <input type="file" name="updateimage"  accept="image/png, image/jpeg" />
+        <img th:src="${image}"/>
+        <button type="submit">Submit</button>
+    </form>
+
+
+</body>
+</html>
